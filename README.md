@@ -4,7 +4,7 @@
 
 The main goal of this project is to make the life easy mining cards for Anki. This code is aimed at inserting the English definition but can be changed to other purposes. If you want to do that, make sure to read the last topic. Follow the image, which illustrates how the card is going to be added.
 
-![image](https://github.com/user-attachments/assets/9934b2a8-fa33-4787-b051-230ccd3f8893)
+![image](https://github.com/user-attachments/assets/3e48bea3-b961-46fb-8f7e-c2fa1cb80e54)
 
 If the code doesn't find any phrases, it'll replace the phrase with the word you want to remember the meaning of, and the definitions are going to be the same.
 
