@@ -39,7 +39,7 @@ class CardController {
               modelName: model_name,
               fields: {
                 Front: word,
-                Back: "Meaning - " + defs.join(", "),
+                Back: `Meaning of ${word} - ` + defs.join(", "),
               },
             },
           },
@@ -56,7 +56,7 @@ class CardController {
               modelName: model_name,
               fields: {
                 Front: phrase,
-                Back: "Meaning - " + defs.join(", "),
+                Back: `Meaning of ${word} - ` + defs.join(", "),
               },
             },
           },
