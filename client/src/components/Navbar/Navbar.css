@@ -1,0 +1,22 @@
+.navBar {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  z-index: 200;
+  align-items: center;
+  color: #fff;
+  position: fixed;
+  margin-top: 20px;
+}
+
+.navUl li {
+  display: inline-block;
+  margin: 5px 20px;
+  font-size: 21px;
+  list-style: none;
+}
+
+.navUl li h1 {
+  color: lightsalmon;
+}
