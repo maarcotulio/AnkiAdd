@@ -4,7 +4,7 @@
 
 The main goal of this project is to make the life easy mining cards for Anki. This code is aimed at inserting the English definition but can be changed to other purposes. If you want to do that, make sure to read the last topic. Follow the image, which illustrates how the card is going to be added.
 
-![image](https://github.com/user-attachments/assets/962fcea3-31f6-4c59-a104-8d4f7f2a6828)
+![image](https://github.com/user-attachments/assets/9934b2a8-fa33-4787-b051-230ccd3f8893)
 
 If the code doesn't find any phrases, it'll replace the phrase with the word you want to remember the meaning of, and the definitions are going to be the same.
 
@@ -12,7 +12,7 @@ If the code doesn't find any phrases, it'll replace the phrase with the word you
 
 You'll need to install the [AnkiConnect](https://ankiweb.net/shared/info/2055492159) add-on. Please make sure the port that has been used in the AnkiConnect is the same in the code and the link to the localhost; otherwise, it's not going to work. If you want to be safe, make sure to be the same as the following image:
 
-![image](https://github.com/user-attachments/assets/883ff95e-ec39-4e54-a44d-ac67054b729a)
+![image](https://github.com/user-attachments/assets/42cc058e-b777-49c3-8d36-e838b30efa88)
 
 ## How To Use
 
