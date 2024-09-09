@@ -42,7 +42,7 @@ To run the code do this respectively, client and server both need to be running:
     yarn run dev
 ```
 
-Now just acess the client link and enjoy!
+Now just acess the client link, **make sure the Anki is open** and enjoy!
 
 ## What I Used To Build
 
