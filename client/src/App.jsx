@@ -1,5 +1,5 @@
 import React from "react";
-import FormCard from "./components/FormCard/FormCard";
+import SearchTranslate from "./components/Translate/SearchTranslate";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 
@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Navbar></Navbar>
-      <FormCard></FormCard>
+      <SearchTranslate type="word"></SearchTranslate>
     </>
   );
 }

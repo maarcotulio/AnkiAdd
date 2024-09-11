@@ -11,57 +11,47 @@ const axios = require("axios");
 const DefinitionController = require("./DefinitionController");
 const PhraseController = require("./PhraseController");
 
-class CardController {
-  async index(request, response) {
-    try {
-      const data = request.body;
-      const word = data["word"];
-      let card;
+// Anki Model
+let card = {
+  action: "addNote",
+  version: anki_version,
+  params: {
+    note: {
+      deckName: deck_name,
+      modelName: model_name,
+      fields: {
+        Front: "",
+        Back: "",
+      },
+    },
+  },
+};
 
-      // Getting the definition
-      let defs = await DefinitionController(word);
-      if (!defs) {
-        response.status(200).send(null);
+class CardController {
+  async searchWord(req, res) {
+    res.sendMessage = (status, message) => {
+      return res.status(status).json({ msg: message });
+    };
+
+    try {
+      const data = req.body;
+      const word = data["input"];
+
+      // Assync
+      const [getDefinition, getPhrase] = await Promise.all([
+        DefinitionController(word),
+        PhraseController(word),
+      ]);
+
+      if (!getDefinition) {
+        res.sendMessage(200, "Word was not founded");
         return console.log("Word was not founded");
       }
 
-      // Getting the phrase
-      let phrase = await PhraseController(word);
-      if (!phrase) {
-        response.status(200).json({ word, defs });
-
-        card = {
-          action: "addNote",
-          version: anki_version,
-          params: {
-            note: {
-              deckName: deck_name,
-              modelName: model_name,
-              fields: {
-                Front: word,
-                Back: `Meaning of ${word} - ` + defs.join(", "),
-              },
-            },
-          },
-        };
-
-        console.log("Phrase was not founded. Yet the card will be Added");
-      } else {
-        card = {
-          action: "addNote",
-          version: anki_version,
-          params: {
-            note: {
-              deckName: deck_name,
-              modelName: model_name,
-              fields: {
-                Front: phrase,
-                Back: `Meaning of ${word} - ` + defs.join(", "),
-              },
-            },
-          },
-        };
-      }
+      card.params.note.fields.front = getPhrase || word;
+      card.params.note.fields.Back = `Meaning of ${word} - ${getDefinition.join(
+        ", "
+      )}`;
 
       await axios.post(URL_TO_THE_ANKICONNECT, card, {
         headers: {
@@ -70,11 +60,19 @@ class CardController {
       });
 
       console.log("Card Added");
-      response.status(200).json({ word, defs });
+      res.sendMessage(200, `The meaning of ${word} - ${getDefinition}`);
     } catch (err) {
-      console.error("Error processing request", err);
-      response.sendStatus(500);
+      console.error("Anki not open or a problem with AnkiConnect");
+      res.sendMessage(404, "Anki not open or a problem with AnkiConnect");
     }
+  }
+
+  async translatePhrase(req, res) {
+    res.sendMessage = (status, message) => {
+      return res.status(status).json({ msg: message });
+    };
+
+    // Building...
   }
 }
 

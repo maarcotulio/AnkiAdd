@@ -16,11 +16,15 @@ async function DefinitionController(word) {
 
   // Getting the definition
   const items = await getDefinition(word);
-  items["sections"][0]["translations"].length !== 0
-    ? (translations = items["sections"][0]["translations"])
-    : (translations = undefined);
+  try {
+    translations = items["sections"][0]["translations"];
+  } catch {
+    translations = undefined;
+    return translations;
+  }
 
-  if (!translations) {
+  // This is here because sometimes the word is registred but don't have a definition
+  if (translations.length === 0) {
     return undefined;
   }
 

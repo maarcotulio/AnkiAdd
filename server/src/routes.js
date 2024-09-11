@@ -3,6 +3,7 @@ const CardController = require("./controller/CardController");
 
 const route = Router();
 
-route.post("/", CardController.index);
+route.post("/searchWord", CardController.searchWord);
+route.post("/translatePhrase", CardController.translatePhrase);
 
 module.exports = route;
