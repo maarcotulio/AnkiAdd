@@ -6,6 +6,7 @@ const { SERVER_SITE } = config;
 
 function SearchTranslate(props) {
   const [translate, setTranslate] = useState("");
+  const [text, setText] = useState("");
   const server =
     props.type === "word"
       ? `${SERVER_SITE}/searchWord`
@@ -14,9 +15,7 @@ function SearchTranslate(props) {
   const fetchAPI = async (input) => {
     try {
       const response = await axios.post(server, { input });
-      alert(response.data.msg);
-
-      location.reload();
+      setText(response.data.msg);
     } catch (err) {
       alert("Error 503, Service is Unavailable");
       console.log(err);
@@ -36,7 +35,7 @@ function SearchTranslate(props) {
 
   return (
     <>
-      <div className="pageSpace boxForm">
+      <div className="boxForm">
         <form onSubmit={handlerSubmit} className="form-card">
           <label className="text-form">{`
             Write a ${props.type} to add in Anki
@@ -53,6 +52,10 @@ function SearchTranslate(props) {
             </button>
           </div>
         </form>
+        <div className="textBox">
+          <p id="text-input">{translate}</p>
+          <small>{`${text}`}</small>
+        </div>
       </div>
     </>
   );

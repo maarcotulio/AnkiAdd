@@ -40,3 +40,13 @@
   cursor: pointer;
   font-size: 16px;
 }
+
+.textBox {
+  position: fixed;
+  margin-top: 35%;
+  text-align: center;
+}
+
+.textBox small {
+  font-size: 16px;
+}
