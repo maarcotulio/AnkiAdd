@@ -1,17 +1,15 @@
-// ONLY change this if you changed the port in the file index.js in the server
-const server_site = "http://localhost:8080";
-
-// IGNORE
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./SearchTranslate.css";
+import config from "../../config";
+const { SERVER_SITE } = config;
 
 function SearchTranslate(props) {
   const [translate, setTranslate] = useState("");
   const server =
     props.type === "word"
-      ? `${server_site}/searchWord`
-      : `${server_site}/translatePhrase`;
+      ? `${SERVER_SITE}/searchWord`
+      : `${SERVER_SITE}/translatePhrase`;
 
   const fetchAPI = async (input) => {
     try {
@@ -20,7 +18,8 @@ function SearchTranslate(props) {
 
       location.reload();
     } catch (err) {
-      alert(err.response.data.msg);
+      alert("Error 503, Service is Unavailable");
+      console.log(err);
     }
   };
 
