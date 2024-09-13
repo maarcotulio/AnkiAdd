@@ -7,7 +7,10 @@ async function PhraseController(word) {
       if (err) {
         reject(new Error(err.message));
       } else {
-        resolve(response["examples"][0]["source"]);
+        let phrase = response["examples"][0]["source"];
+        phrase = phrase.replace(word, "<br>", word, "</br>");
+
+        resolve(phrase);
       }
     });
   });
