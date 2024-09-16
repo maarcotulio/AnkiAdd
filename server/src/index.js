@@ -1,9 +1,6 @@
-// Change ONLY if you changed the URL port from client. Make to be the same link
-const WEB_SITE_URL = "http://localhost:5173";
-
-// IGNORE
-const express = require("express");
+const { WEB_SITE_URL } = require("../../config/server");
 require("express-async-errors");
+const express = require("express");
 const app = express();
 const routes = require("./routes");
 const cors = require("cors");

@@ -4,10 +4,14 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  background-color: #161a30;
-  color: white;
   text-decoration: none;
   font-family: "Poppins", system-ui;
+}
+
+.pg_1 {
+  background-color: #161a30;
+  height: 100vh;
+  width: 100%;
 }
 
 .container {

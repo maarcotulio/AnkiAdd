@@ -1,12 +1,11 @@
 const axios = require("axios");
-const DefinitionController = require("./DefinitionController");
-const PhraseController = require("./PhraseController");
+const DefinitionController = require("./DictionaryControllers");
 const {
   DECK_NAME,
   DECK_MODEL,
   ANKI_VERSION,
   URL_TO_THE_ANKICONNECT,
-} = require("../config");
+} = require("../../../config/server.js");
 
 // Card Model
 function createCard(front, back) {
@@ -28,31 +27,30 @@ function createCard(front, back) {
 
 class CardController {
   async searchWord(req, res) {
-    res.sendMessage = (stats, input) => {
-      return res.status(stats).json({ msg: input });
+    res.sendMessage = (status, input) => {
+      return res.status(status).json({ msg: input });
     };
 
-    try {
-      const data = req.body;
-      const word = data["input"];
-      if (!word || typeof word != "string") {
-        return res.sendMessage(400, "Invalid input: word is missing ");
-      }
-
-      const [getDefinition, getPhrase] = await Promise.all([
-        DefinitionController(word),
-        PhraseController(word),
-      ]);
-
-      if (!getDefinition) {
-        res.sendMessage(200, "Word was not found");
-        return console.log("Word was not found");
-      }
-
-      const card = createCard(
-        getPhrase || word,
-        `Meaning of ${word} - ${getDefinition.join(", ")}`
+    const word = req.body?.input;
+    if (!word || typeof word != "string") {
+      return res.sendMessage(
+        400,
+        "Invalid input: word is missing or not a string"
       );
+    }
+
+    try {
+      const { defs, example } = await DefinitionController(word);
+      if (!defs) {
+        return res.sendMessage(404, "Word not found in the dictionary");
+      }
+      if (defs === 503) {
+        return res.sendMessage(503, "Dictionary API Service is Unavailable");
+      }
+
+      let enumeratedDefs = defs.map((item, index) => `${index + 1} - ${item}`);
+
+      const card = createCard(example, `${enumeratedDefs.join("<br> ")}`);
 
       await axios.post(URL_TO_THE_ANKICONNECT, card, {
         headers: {
@@ -61,15 +59,15 @@ class CardController {
       });
 
       console.log("Card Added");
-      res.sendMessage(201, `The meaning of ${word} - ${getDefinition}`);
+      res.sendMessage(201, `${enumeratedDefs.join("\n")}`);
     } catch (err) {
-      console.error("Error occurred:", err.message);
-      res.sendMessage(503, "Anki is not open or a problem with AnkiConnect");
-    }
-  }
+      console.error("Error occurred while trying to send card:", err.message);
 
-  async translatePhrase(req, res) {
-    // Building...
+      res.sendMessage(
+        503,
+        "Anki is not open or there is a problem with AnkiConnect"
+      );
+    }
   }
 }
 

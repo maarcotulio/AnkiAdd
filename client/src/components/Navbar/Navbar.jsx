@@ -1,18 +1,16 @@
 import React from "react";
+import SearchBar from "../SearchBar/SearchBar";
 import "./Navbar.css";
 
 export const Navbar = () => {
   return (
     <nav className="navBar">
-      <ul className="navUl">
+      <ul>
         <li>
-          <a href="#addCard">Add Word</a>
+          <h1 className="logoName">Anki Adder</h1>
         </li>
         <li>
-          <h1>Anki Adder</h1>
-        </li>
-        <li>
-          <a href="#tuto">Tutorial</a>
+          <SearchBar type="word"></SearchBar>
         </li>
       </ul>
     </nav>

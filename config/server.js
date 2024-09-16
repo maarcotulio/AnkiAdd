@@ -5,6 +5,7 @@ const config = {
   DECK_MODEL: "Basic",
   ANKI_VERSION: 6,
   URL_TO_THE_ANKICONNECT: "http://localhost:8765/",
+  WEB_SITE_URL: "http://localhost:5173",
 };
 
 module.exports = config;
