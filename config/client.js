@@ -1,3 +1,3 @@
-const SERVER = "http://localhost:8080/searchWord";
+const SERVER = "http://localhost:8080";
 
 export default SERVER;

@@ -6,7 +6,7 @@ const ListWordsSearched = () => {
   const [listWords, setListWords] = useState(
     () => JSON.parse(localStorage.getItem("words")) || []
   );
-  const { word } = useContext(DefsContext);
+  const { word, handlerClick } = useContext(DefsContext);
 
   useEffect(() => {
     if (word && !listWords.includes(word)) {
@@ -14,7 +14,7 @@ const ListWordsSearched = () => {
       setListWords(updatedWords);
       localStorage.setItem("words", JSON.stringify(updatedWords));
     }
-  }, [word, listWords]);
+  }, [word]);
 
   function deleteWordHandler(index) {
     const updatedWords = listWords.filter((_, i) => i !== index);
@@ -27,7 +27,9 @@ const ListWordsSearched = () => {
       {listWords.map((element, index) => (
         <li key={index}>
           <div className="liBox">
-            <p className="wordName">{element}</p>
+            <p className="wordName" onClick={(e) => handlerClick(element)}>
+              {element}
+            </p>
             <svg
               onClick={(e) => deleteWordHandler(index)}
               xmlns="http://www.w3.org/2000/svg"

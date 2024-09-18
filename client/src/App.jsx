@@ -12,9 +12,9 @@ function App() {
   const [definition, setNewDefinition] = useState("");
   const [word, setNewWord] = useState("");
 
-  const fetchDefinition = async (input) => {
+  const addCard = async (input) => {
     try {
-      const response = await axios.post(SERVER, { input });
+      const response = await axios.post(`${SERVER}/addWord`, { input });
       setNewDefinition(response.data.msg);
       setNewWord(input);
     } catch (err) {
@@ -27,10 +27,29 @@ function App() {
     }
   };
 
+  const fetchWord = async (input) => {
+    try {
+      const response = await axios.post(`${SERVER}/searchWord`, { input });
+      setNewDefinition(response.data.msg);
+      setNewWord(input);
+    } catch (err) {
+      if (err.response && err.response.status === 404) {
+        return alert("Word not found");
+      }
+
+      alert("Error 503, Service is Unavailable");
+      console.log(err);
+    }
+  };
+
+  const handlerClick = async (input) => {
+    await fetchWord(input);
+  };
+
   const handlerKeyDown = async (event, input) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      await fetchDefinition(input);
+      await addCard(input);
     }
   };
 
@@ -40,6 +59,7 @@ function App() {
         definition,
         handlerKeyDown,
         word,
+        handlerClick,
       }}
     >
       <div className="pg_1">

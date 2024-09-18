@@ -26,7 +26,7 @@ function createCard(front, back) {
 }
 
 class CardController {
-  async searchWord(req, res) {
+  async addWord(req, res) {
     res.sendMessage = (status, input) => {
       return res.status(status).json({ msg: input });
     };
@@ -67,6 +67,40 @@ class CardController {
         503,
         "Anki is not open or there is a problem with AnkiConnect"
       );
+    }
+  }
+  async searchWord(req, res) {
+    res.sendMessage = (status, input) => {
+      return res.status(status).json({ msg: input });
+    };
+
+    const word = req.body?.input;
+    if (!word || typeof word != "string") {
+      return res.sendMessage(
+        400,
+        "Invalid input: word is missing or not a string"
+      );
+    }
+
+    try {
+      const { defs } = await DefinitionController(word);
+      if (!defs) {
+        return res.sendMessage(404, "Word not found in the dictionary");
+      }
+      if (defs === 503) {
+        return res.sendMessage(503, "Dictionary API Service is Unavailable");
+      }
+
+      let enumeratedDefs = defs.map((item, index) => `${index + 1} - ${item}`);
+
+      res.sendMessage(201, `${enumeratedDefs.join("\n")}`);
+    } catch (err) {
+      console.error(
+        "Error occurred while trying to check dictionary:",
+        err.message
+      );
+
+      res.sendMessage(503, "Dictionary is offline");
     }
   }
 }
