@@ -16,7 +16,7 @@ You'll need to install the [AnkiConnect](https://ankiweb.net/shared/info/2055492
 
 ## How To Use
 
-Go to the folder Config and read the comments in the files and make the necessary changes. 
+Go to the folder Config and read the comments in the files and make the necessary changes.
 
 Install all necessary node_modules in the files the client uses npm and the server uses yarn. To do that in the client file you can write:
 
@@ -40,3 +40,6 @@ To run the code do this respectively, client and server both need to be running:
 
 Now open the client link, **make sure the Anki is open** and enjoy! All searched words if have in the dictionary going to be added.
 
+# What I used
+
+I have used a [Dictionary API](https://dictionaryapi.dev/) and the Icons by [Icons 8](https://icons8.com/).

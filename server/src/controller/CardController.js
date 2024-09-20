@@ -50,7 +50,10 @@ class CardController {
 
       let enumeratedDefs = defs.map((item, index) => `${index + 1} - ${item}`);
 
-      const card = createCard(example, `${enumeratedDefs.join("<br> ")}`);
+      const card = createCard(
+        example,
+        `Meaning of ${word}:<br>${enumeratedDefs.join("<br> ")}`
+      );
 
       await axios.post(URL_TO_THE_ANKICONNECT, card, {
         headers: {
