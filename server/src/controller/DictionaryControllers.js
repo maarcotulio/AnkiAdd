@@ -17,7 +17,9 @@ async function DefinitionController(word) {
     example = example.replace(word, `<b>${word}</b>`);
 
     return {
-      defs: defsArr.map(({ definition }) => definition),
+      defs: defsArr
+        .map(({ definition }) => definition)
+        .map((item, index) => `${index + 1} - ${item}`),
       example,
     };
   } catch (error) {
