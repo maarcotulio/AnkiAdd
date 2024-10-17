@@ -6,8 +6,8 @@ async function DefinitionController(word) {
     const response = await axios.get(`${dictionaryApi + word}`);
     const data = response.data[0];
 
-    const defsArr = data.meanings.flatMap((meaning) =>
-      meaning.definitions.map(({ definition, example }) => {
+    const defsArr = data.meanings?.flatMap((meaning) =>
+      meaning.definitions?.map(({ definition, example }) => {
         return { definition, example };
       })
     );
@@ -17,9 +17,7 @@ async function DefinitionController(word) {
     example = example.replace(word, `<b>${word}</b>`);
 
     return {
-      defs: defsArr
-        .map(({ definition }) => definition)
-        .map((item, index) => `${index + 1} - ${item}`),
+      defs: defsArr.map(({ definition }) => definition),
       example,
     };
   } catch (error) {

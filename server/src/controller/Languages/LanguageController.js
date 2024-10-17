@@ -42,7 +42,12 @@ class LanguageController {
     try {
       const { defs, example } = await DefinitionController(word);
 
-      const card = createCard(example, defs);
+      let enumeratedDefs = defs.map((item, index) => `${index + 1} - ${item}`);
+
+      const card = createCard(
+        example,
+        `Meaning of ${word}:<br>${enumeratedDefs.join("<br> ")}`
+      );
 
       await axios.post(URL_TO_THE_ANKICONNECT, card, {
         headers: {
@@ -51,8 +56,9 @@ class LanguageController {
       });
 
       console.log("Card Added");
+      res.sendMessage(201, defs);
     } catch (err) {
-      console.error("Error occurred while trying to send card:", err.message);
+      console.error(word);
 
       res.sendMessage(
         503,

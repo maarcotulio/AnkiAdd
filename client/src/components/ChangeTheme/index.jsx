@@ -11,7 +11,7 @@ const ChangeTheme = () => {
   return (
     <Container>
       <div className="btnChangeTheme" onClick={clickHandler}>
-        {isLightMode ? "🌚" : "🌞"}
+        {isLightMode ? "🌞" : "🌚"}
       </div>
     </Container>
   );

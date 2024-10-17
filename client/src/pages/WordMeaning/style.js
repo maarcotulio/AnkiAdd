@@ -7,27 +7,6 @@ export const Container = styled.div`
   text-align: left;
   padding: 16px;
 
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  div button {
-    width: 30px;
-    height: 30px;
-    background: transparent;
-    border: none;
-  }
-
-  div button:hover {
-    transform: scale(1.1);
-  }
-
-  div button svg {
-    fill: ${({ theme }) => theme.colors.font};
-  }
-
   h1 {
     font-family: "Poppins", sans-serif;
     font-size: 42px;
@@ -40,5 +19,26 @@ export const Container = styled.div`
 
   .loading {
     text-align: center;
+  }
+`;
+
+export const DefinitionContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  button {
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: none;
+  }
+
+  button:hover {
+    transform: scale(1.1);
+  }
+
+  button svg {
+    fill: ${({ theme }) => theme.colors.font};
   }
 `;

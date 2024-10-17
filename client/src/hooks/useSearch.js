@@ -2,7 +2,7 @@ import axios from "axios";
 import SERVER from "../../../config/client";
 
 export default function useSearch() {
-  async function SearchWordAndAdd(word, language) {
+  async function SearchWordAndAdd(word, language = "en") {
     try {
       const response = await axios.post(`${SERVER}/${language}/addWord`, {
         input: word,
@@ -10,10 +10,9 @@ export default function useSearch() {
       return response.data.msg;
     } catch (err) {
       if (err.response && err.response.status === 404) {
-        return alert("Word not found");
+        return;
       }
 
-      alert("Error 503, Service is Unavailable");
       console.log(err);
     }
   }
@@ -32,10 +31,9 @@ export default function useSearch() {
       return response.data.msg;
     } catch (err) {
       if (err.response && err.response.status === 404) {
-        return alert("Word not found");
+        return;
       }
 
-      alert("Error 503, Service is Unavailable");
       console.log(err);
     }
   }
