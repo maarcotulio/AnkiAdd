@@ -34,7 +34,7 @@ async function processWordsInBatches(words, batchSize) {
 
     await Promise.all(batch.map((word) => addWord(word)));
 
-    await delay(500);
+    await delay(2000);
   }
 }
 
