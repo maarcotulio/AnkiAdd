@@ -9,10 +9,8 @@ const ListDefinitionOfWords = () => {
   useEffect(() => {
     async function AddAllWords() {
       if (Array.isArray(list) && list.length > 0) {
-        await list.map(async (word) => {
-          const response = await SearchWordAndAdd(word);
-          console.log(response);
-        });
+        const response = await SearchWordAndAdd(list);
+        console.log(response);
       }
     }
     AddAllWords();

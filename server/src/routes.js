@@ -1,10 +1,10 @@
 const { Router } = require("express");
-const LanguageController = require("./controller/Languages/LanguageController");
+const WordsController = require("./controller/WordsController");
 
 const route = Router();
 
-route.post("/en/addWord", LanguageController.addWord);
-route.post("/en/searchWord", LanguageController.searchWord);
+route.post("/en/addWord", WordsController.AddListOfWordsController);
+route.post("/en/searchWord", WordsController.SearchWord);
 
 // route.post("/jp/addWord", CardController.addWord);
 // route.post("/jp/searchWord", CardController.searchWord);

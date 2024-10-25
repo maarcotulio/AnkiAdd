@@ -9,7 +9,7 @@ const {
 
 // Card Model
 function createCard(front, back) {
-  return {
+  return JSON.stringify({
     action: "addNote",
     version: ANKI_VERSION,
     params: {
@@ -20,84 +20,65 @@ function createCard(front, back) {
           Front: front,
           Back: back,
         },
+        tags: [],
       },
     },
-  };
+  });
 }
 
-class LanguageController {
-  async addWord(req, res) {
-    res.sendMessage = (status, input) => {
-      return res.status(status).json({ msg: input });
-    };
-
-    const word = req.body?.input;
-    if (!word || typeof word != "string") {
-      return res.sendMessage(
-        400,
-        "Invalid input: word is missing or not a string"
-      );
+async function addWord(word) {
+  try {
+    const { defs, example } = await DefinitionController(word);
+    if (!defs) {
+      console.log("Word not found in the dictionary");
+      return 404;
+    }
+    if (defs === 503) {
+      console.log("Dictionary API Service is Unavailable");
+      return 503;
     }
 
-    try {
-      const { defs, example } = await DefinitionController(word);
+    let enumeratedDefs = defs.map((item, index) => `${index + 1} - ${item}`);
 
-      let enumeratedDefs = defs.map((item, index) => `${index + 1} - ${item}`);
+    const card = createCard(
+      example,
+      `Meaning of ${word}:<br>${enumeratedDefs.join("<br> ")}`
+    );
 
-      const card = createCard(
-        example,
-        `Meaning of ${word}:<br>${enumeratedDefs.join("<br> ")}`
-      );
+    await axios.post(URL_TO_THE_ANKICONNECT, card, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-      await axios.post(URL_TO_THE_ANKICONNECT, card, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      console.log("Card Added");
-      res.sendMessage(201, defs);
-    } catch (err) {
-      console.error(word);
-
-      res.sendMessage(
-        503,
-        "Anki is not open or there is a problem with AnkiConnect"
-      );
-    }
-  }
-  async searchWord(req, res) {
-    res.sendMessage = (status, input) => {
-      return res.status(status).json({ msg: input });
-    };
-
-    const word = req.body?.input;
-    if (!word || typeof word != "string") {
-      return res.sendMessage(
-        400,
-        "Invalid input: word is missing or not a string"
-      );
-    }
-
-    try {
-      const { defs } = await DefinitionController(word);
-      if (!defs) {
-        return res.sendMessage(404, "Word not found in the dictionary");
-      }
-      if (defs === 503) {
-        return res.sendMessage(503, "Dictionary API Service is Unavailable");
-      }
-
-      res.sendMessage(201, defs);
-    } catch (err) {
-      console.error(
-        "Error occurred while trying to check dictionary:",
-        err.message
-      );
-
-      res.sendMessage(503, "Dictionary is offline");
-    }
+    console.log("Card Added");
+    return defs;
+  } catch (error) {
+    console.error("Error adding card:", error);
   }
 }
 
-module.exports = new LanguageController();
+async function searchWord(word) {
+  try {
+    const { defs } = await DefinitionController(word);
+    if (!defs) {
+      return res.sendMessage(404, "Word not found in the dictionary");
+    }
+    if (defs === 503) {
+      return res.sendMessage(503, "Dictionary API Service is Unavailable");
+    }
+
+    let enumeratedDefs = defs.map((item, index) => `${index + 1} - ${item}\n`);
+
+    return enumeratedDefs;
+  } catch (err) {
+    console.error(
+      "Error occurred while trying to check dictionary:",
+      err.message
+    );
+
+    res.sendMessage(503, "Dictionary is offline");
+  }
+}
+
+module.exports = [addWord, searchWord];
