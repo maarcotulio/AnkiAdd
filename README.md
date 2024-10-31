@@ -18,11 +18,7 @@ You'll need to install the [AnkiConnect](https://ankiweb.net/shared/info/2055492
 
 Go to the folder Config and read the comments in the files and make the necessary changes.
 
-Install all necessary node_modules in the files the client uses npm and the server uses yarn. To do that in the client file you can write:
-
-```
-    npm i
-```
+Install all necessary node_modules in the files the client and server both use yarn. To install de the modules write this command in your terminal in both files:
 
 And in the server file you do:
 
@@ -30,11 +26,9 @@ And in the server file you do:
     yarn install
 ```
 
-To run the code do this respectively, client and server both need to be running:
+To run the code use the follow code, **both need to be running　with Anki and Ankiconnect working**:
 
 ```
-    npm run dev
-
     yarn run dev
 ```
 
