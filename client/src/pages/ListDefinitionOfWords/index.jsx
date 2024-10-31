@@ -5,6 +5,7 @@ import useSearch from "../../hooks/useSearch";
 const ListDefinitionOfWords = () => {
   const [list, setList] = useState([]);
   const { SearchWordAndAdd } = useSearch(); // Custom hook
+  // const { definitionList, setDefinitionList } = useState([]);
 
   useEffect(() => {
     async function AddAllWords() {
@@ -14,10 +15,11 @@ const ListDefinitionOfWords = () => {
       }
     }
     AddAllWords();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [list]);
 
   function handleSubmit(event) {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       const textInput = event.target.value;
       const lines = textInput.split("\n");
@@ -29,8 +31,9 @@ const ListDefinitionOfWords = () => {
 
   return (
     <Container>
+      <h1>Insert a list of words</h1>
       <TextArea onKeyDown={handleSubmit} />
-      <DefsList />
+      <DefsList></DefsList>
     </Container>
   );
 };

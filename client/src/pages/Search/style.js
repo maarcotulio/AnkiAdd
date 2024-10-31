@@ -11,11 +11,10 @@ export const Container = styled.div`
   }
 `;
 
-export const TextArea = styled.textarea`
+export const Input = styled.input`
   width: 600px;
   height: 40px;
   position: absolute;
-
   left: 50%;
   resize: none;
   transform: translateX(-50%);
@@ -30,12 +29,7 @@ export const TextArea = styled.textarea`
   color: ${({ theme }) => theme.colors.search.text};
   transform: translateX(-50%);
   outline: none;
-  padding: 8px 16px 8px 16px;
+  padding: 16px;
   font-size: 18px;
   font-family: "Sora", sans-serif;
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
 `;
-export const DefsList = styled.div``;

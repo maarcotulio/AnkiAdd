@@ -30,7 +30,7 @@ async function addWord(word) {
   try {
     const { defs, example } = await DefinitionController(word);
     if (!defs) {
-      console.log("Word not found in the dictionary");
+      console.log(`Word ${word} not found in the dictionary`);
       return 404;
     }
     if (defs === 503) {
@@ -51,7 +51,7 @@ async function addWord(word) {
       },
     });
 
-    console.log("Card Added");
+    console.log(`Word ${word} was added`);
     return defs;
   } catch (error) {
     console.error("Error adding card:", error);

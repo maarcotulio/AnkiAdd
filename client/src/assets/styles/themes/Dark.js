@@ -1,14 +1,14 @@
 export default {
   mode: "Dark",
   colors: {
-    background: "#0e1217",
+    background: "#212121",
     font: "#FFF",
     header: {
       background: "#093f7e",
     },
     search: {
-      background: "#708090",
-      text: "#000",
+      background: "#2F2F2F",
+      text: "#fff",
     },
   },
 };

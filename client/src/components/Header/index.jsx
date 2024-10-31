@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 
 import { Container } from "./style";
 
-import Search from "../Search";
 import ChangeTheme from "../ChangeTheme";
 
 const Header = () => {
@@ -12,12 +11,13 @@ const Header = () => {
         <Link to="/">
           <h2>Anki Adder</h2>
         </Link>
-        <select name="language" id="lg">
-          <option value="en">🇺🇸</option>
-          <option value="jp">🇯🇵</option>
-        </select>
+        <Link to="/search">
+          <p>Search</p>
+        </Link>
+        <Link to="/list">
+          <p>List</p>
+        </Link>
       </div>
-      <Search />
       <ChangeTheme />
     </Container>
   );

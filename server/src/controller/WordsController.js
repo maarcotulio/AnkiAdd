@@ -4,7 +4,7 @@ class WordsController {
   async AddListOfWordsController(req, res) {
     const words = req.body?.input;
     if (Array.isArray(words) && words.length >= 1) {
-      await processWordsInBatches(words, 10);
+      await processWordsInBatches(words, 5);
 
       return res.status(201);
     }
