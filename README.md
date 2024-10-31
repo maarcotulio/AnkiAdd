@@ -10,7 +10,7 @@ If the code doesn't find any phrases, it'll replace the phrase with the word you
 
 # Requirements
 
-You'll need to install the [AnkiConnect](https://ankiweb.net/shared/info/2055492159) add-on. Please make sure the port that has been used in the AnkiConnect is the same in the code and the link to the localhost; otherwise, it's not going to work. If you want to be safe, make sure to be the same as the following image:
+You'll need to install the [AnkiConnect](https://ankiweb.net/shared/info/2055492159) add-on. Please make sure the port that has been used in the AnkiConnect is the same in the code and the link to the localhost and you are using node in version 20.17.0. Otherwise, it's not going to work. If you want to be safe, make sure to be the same as the following image:
 
 ![image](https://github.com/user-attachments/assets/42cc058e-b777-49c3-8d36-e838b30efa88)
 
@@ -42,4 +42,4 @@ Now open the client link, **make sure the Anki is open** and enjoy! All searched
 
 # What I used
 
-I have used a [Dictionary API](https://dictionaryapi.dev/) and the Icons by [Icons 8](https://icons8.com/).
+I have used a [Dictionary API](https://dictionaryapi.dev/).
