@@ -5,12 +5,11 @@ class WordsController {
     const words = req.body?.input;
     if (Array.isArray(words) && words.length >= 1) {
       await processWordsInBatches(words, 5);
-
-      return res.status(201);
+    } else {
+      await addWord(words);
     }
 
-    await addWord(words);
-    return res.status(201);
+    return res.status(201).json({ msg: "Success" });
   }
 
   async SearchWord(req, res) {
