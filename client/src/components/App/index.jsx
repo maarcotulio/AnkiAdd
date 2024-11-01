@@ -10,7 +10,7 @@ import Header from "../Header";
 import HandleRoutes from "../../Routes";
 
 import { Container } from "./style";
-import Bottom from "../Bottom";
+import WordsSearched from "../WordsSearched";
 
 const ThemeContext = createContext();
 
@@ -31,8 +31,8 @@ const App = () => {
           <GlobalStyles />
           <Container>
             <Header />
+            <WordsSearched />
             <HandleRoutes />
-            <Bottom />
           </Container>
         </ThemeProvider>
       </ThemeContext.Provider>
