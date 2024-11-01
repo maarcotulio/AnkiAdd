@@ -54,7 +54,7 @@ async function addWord(word) {
     console.log(`Word ${word} was added`);
     return defs;
   } catch (error) {
-    console.error("Error adding card:", error);
+    console.error("Anki Connect is not working right");
   }
 }
 
