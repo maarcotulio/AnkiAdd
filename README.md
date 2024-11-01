@@ -10,7 +10,7 @@ If the code doesn't find any phrases, it'll replace the phrase with the word you
 
 # Requirements
 
-You'll need to install the [AnkiConnect](https://ankiweb.net/shared/info/2055492159) add-on. Please make sure the port that has been used in the AnkiConnect is the same in the code and the link to the localhost; otherwise, it's not going to work. If you want to be safe, make sure to be the same as the following image:
+You'll need to install the [AnkiConnect](https://ankiweb.net/shared/info/2055492159) add-on. Please make sure the port that has been used in the AnkiConnect is the same in the code and the link to the localhost and you are using node in version 20.17.0. Otherwise, it's not going to work. If you want to be safe, make sure to be the same as the following image:
 
 ![image](https://github.com/user-attachments/assets/42cc058e-b777-49c3-8d36-e838b30efa88)
 
@@ -18,11 +18,7 @@ You'll need to install the [AnkiConnect](https://ankiweb.net/shared/info/2055492
 
 Go to the folder Config and read the comments in the files and make the necessary changes.
 
-Install all necessary node_modules in the files the client uses npm and the server uses yarn. To do that in the client file you can write:
-
-```
-    npm i
-```
+Install all necessary node_modules in the files the client and server both use yarn. To install de the modules write this command in your terminal in both files:
 
 And in the server file you do:
 
@@ -30,11 +26,9 @@ And in the server file you do:
     yarn install
 ```
 
-To run the code do this respectively, client and server both need to be running:
+To run the code use the follow code, **both need to be running　with Anki and Ankiconnect working**:
 
 ```
-    npm run dev
-
     yarn run dev
 ```
 
@@ -42,4 +36,4 @@ Now open the client link, **make sure the Anki is open** and enjoy! All searched
 
 # What I used
 
-I have used a [Dictionary API](https://dictionaryapi.dev/) and the Icons by [Icons 8](https://icons8.com/).
+I have used a [Dictionary API](https://dictionaryapi.dev/).
