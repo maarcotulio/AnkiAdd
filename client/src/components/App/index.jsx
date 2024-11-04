@@ -11,6 +11,7 @@ import HandleRoutes from "../../Routes";
 
 import { Container } from "./style";
 import WordsSearched from "../WordsSearched";
+import ToastContainer from "../Toast/ToastContainer";
 
 const ThemeContext = createContext();
 
@@ -29,6 +30,7 @@ const App = () => {
       <ThemeContext.Provider value={{ isLightMode, toggleTheme }}>
         <ThemeProvider theme={isLightMode === false ? Light : Dark}>
           <GlobalStyles />
+          <ToastContainer />
           <Container>
             <Header />
             <WordsSearched />

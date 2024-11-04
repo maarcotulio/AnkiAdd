@@ -1,6 +1,7 @@
 import axios from "axios";
 import SERVER from "../../../config/client";
 import newWordAddedEvent from "../utils/newWordAddedEvent";
+import toast from "../utils/toast";
 
 export default function useSearch() {
   async function SearchWordAndAdd(word, language = "en") {
@@ -8,13 +9,22 @@ export default function useSearch() {
       const response = await axios.post(`${SERVER}/${language}/addWord`, {
         input: word,
       });
-      return response.data.msg;
-    } catch (err) {
-      if (err.response && err.response.status === 404) {
-        return;
-      }
 
-      console.log(err);
+      console.log(response);
+
+      toast({ type: "success", text: "Word was Added" });
+    } catch (err) {
+      if (err.status === 503) {
+        toast({
+          type: "danger",
+          text: "Dictionary API or AnkiConnect aren't working",
+        });
+      } else if (err.status === 404) {
+        toast({
+          type: "danger",
+          text: "Word not found",
+        });
+      }
     }
   }
 
