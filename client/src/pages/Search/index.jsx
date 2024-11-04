@@ -14,7 +14,6 @@ const Search = () => {
     if (event.key === "Enter") {
       SaveWordToLocalStorage(event.target.value);
       navigate(`/search/${event.target.value}`);
-      window.location.reload();
     }
   };
 

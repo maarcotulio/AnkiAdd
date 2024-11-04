@@ -1,5 +1,6 @@
 import axios from "axios";
 import SERVER from "../../../config/client";
+import newWordAddedEvent from "../utils/newWordAddedEvent";
 
 export default function useSearch() {
   async function SearchWordAndAdd(word, language = "en") {
@@ -21,6 +22,7 @@ export default function useSearch() {
     const listWords = JSON.parse(localStorage.getItem("words")) || [];
     const updatedWords = [...listWords, word];
     localStorage.setItem("words", JSON.stringify(updatedWords));
+    newWordAddedEvent(updatedWords);
   }
 
   async function getWordDefinition(word, language) {

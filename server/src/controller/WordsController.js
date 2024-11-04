@@ -31,7 +31,13 @@ async function processWordsInBatches(words, batchSize) {
   for (let i = 0; i < words.length; i += batchSize) {
     const batch = words.slice(i, i + batchSize);
 
-    await Promise.all(batch.map((word) => addWord(word)));
+    await Promise.all(
+      batch.map((word) => {
+        if (word) {
+          addWord(word);
+        }
+      })
+    );
 
     await delay(2000);
   }

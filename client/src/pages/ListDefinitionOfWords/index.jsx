@@ -6,12 +6,17 @@ import Loader from "../../components/Loader";
 const ListDefinitionOfWords = () => {
   const [list, setList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { SearchWordAndAdd } = useSearch(); // Custom hook
+  const { SearchWordAndAdd, SaveWordToLocalStorage } = useSearch(); // Custom hook
 
   useEffect(() => {
     async function AddAllWords() {
       if (Array.isArray(list) && list.length > 0) {
         setIsLoading(true);
+        list.map((word) => {
+          if (word) {
+            SaveWordToLocalStorage(word);
+          }
+        });
         const response = await SearchWordAndAdd(list);
         setIsLoading(false);
         console.log(response);
