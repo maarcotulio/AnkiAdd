@@ -33,10 +33,6 @@ async function addWord(word) {
       console.log(`Word ${word} not found in the dictionary`);
       return 404;
     }
-    if (defs === 503) {
-      console.log("Dictionary API Service is Unavailable");
-      return 503;
-    }
 
     let enumeratedDefs = defs.map((item, index) => `${index + 1} - ${item}`);
 
@@ -52,9 +48,10 @@ async function addWord(word) {
     });
 
     console.log(`Word ${word} was added`);
-    return defs;
+    return 201;
   } catch (error) {
     console.error("Anki Connect is not working right");
+    return 503;
   }
 }
 

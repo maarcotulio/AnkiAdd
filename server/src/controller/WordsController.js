@@ -3,13 +3,14 @@ const [addWord, searchWord] = require("./Languages/LanguageController");
 class WordsController {
   async AddListOfWordsController(req, res) {
     const words = req.body?.input;
+    let status = 201;
     if (Array.isArray(words) && words.length >= 1) {
       await processWordsInBatches(words, 5);
     } else {
-      await addWord(words);
+      status = await addWord(words);
     }
 
-    return res.status(201).json({ msg: "Success" });
+    return res.status(status).json({ msg: "Success" });
   }
 
   async SearchWord(req, res) {

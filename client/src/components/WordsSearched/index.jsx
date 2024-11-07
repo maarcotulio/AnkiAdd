@@ -11,9 +11,13 @@ const GLOBAL_PATH = "/search/";
 const WordsSearched = () => {
   const { isLightMode } = useTheme();
   const trashImg = isLightMode ? trashDarkMode : trash;
-  const [wordsSearched, setWordsSearched] = useState(
-    JSON.parse(localStorage.getItem("words") || [])
-  );
+  const [wordsSearched, setWordsSearched] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("words"));
+    } catch {
+      return [];
+    }
+  });
 
   useEffect(() => {
     function handleListStorage(event) {
