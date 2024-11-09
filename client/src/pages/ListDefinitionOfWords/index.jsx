@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, TextArea, DefsList } from "./style";
+import { Container, TextArea } from "./style";
 import useSearch from "../../hooks/useSearch";
 import Loader from "../../components/Loader";
 
@@ -40,7 +40,6 @@ const ListDefinitionOfWords = () => {
       {isLoading && <Loader isLoading />}
       <h1>Insert a list of words</h1>
       <TextArea onKeyDown={handleSubmit} />
-      <DefsList />
     </Container>
   );
 };

@@ -38,4 +38,3 @@ export const TextArea = styled.textarea`
     display: none;
   }
 `;
-export const DefsList = styled.div``;
