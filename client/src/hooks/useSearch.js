@@ -15,16 +15,21 @@ export default function useSearch() {
       toast({ type: "success", text: "Word was Added" });
     } catch (err) {
       if (err.status === 503) {
-        toast({
+        return toast({
           type: "danger",
           text: "Dictionary API or AnkiConnect aren't working",
         });
       } else if (err.status === 404) {
-        toast({
+        return toast({
           type: "danger",
           text: "Word not found",
         });
       }
+
+      toast({
+        type: "danger",
+        text: "Error occured tyring to search the word",
+      });
     }
   }
 
@@ -43,10 +48,16 @@ export default function useSearch() {
       return response.data.msg;
     } catch (err) {
       if (err.response && err.response.status === 404) {
-        return;
+        return toast({
+          type: "danger",
+          text: "Word not found",
+        });
       }
 
-      console.log(err);
+      toast({
+        type: "danger",
+        text: "Error occured tyring to search the word",
+      });
     }
   }
 
