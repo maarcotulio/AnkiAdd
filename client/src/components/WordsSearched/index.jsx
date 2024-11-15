@@ -1,48 +1,26 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { useTheme } from "../App";
-import { Container, ClearBtn, WordContainer } from "./style";
+import PropTypes from "prop-types";
+import { Container, ClearBtn } from "./style";
 
 import trash from "../../assets/images/icons/trash.svg";
 import trashDarkMode from "../../assets/images/icons/trashDarkMode.svg";
+
+import useWordsSearched from "./useWordsSearched";
+import WordContainer from "./components/WordContainer";
 
 const GLOBAL_PATH = "/search/";
 
 const WordsSearched = () => {
   const { isLightMode } = useTheme();
+  const { wordsSearched, handleDeleteWord, handleDeleteSearchedWords } =
+    useWordsSearched();
+
   const trashImg = isLightMode ? trashDarkMode : trash;
-  const [wordsSearched, setWordsSearched] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem("words"));
-    } catch {
-      return [];
-    }
-  });
-
-  useEffect(() => {
-    function handleListStorage(event) {
-      const { words } = event.detail;
-
-      setWordsSearched(words);
-    }
-
-    document.addEventListener("addwordtolist", handleListStorage);
-  }, []);
-
-  function handleDeleteWord(wordToDelete) {
-    const list = wordsSearched.filter((wordList) => wordToDelete !== wordList);
-    localStorage.setItem("words", JSON.stringify(list));
-    setWordsSearched(list);
-  }
-
-  function handleDeleteSearchedWords() {
-    localStorage.removeItem("words");
-    setWordsSearched([]);
-  }
+  const hasWordsSearched = wordsSearched?.length >= 1;
 
   return (
     <>
-      {wordsSearched?.length >= 1 && (
+      {hasWordsSearched && (
         <Container>
           <ClearBtn>
             <img
@@ -53,15 +31,13 @@ const WordsSearched = () => {
           </ClearBtn>
 
           {wordsSearched.map((word) => (
-            <WordContainer key={word}>
-              <Link to={GLOBAL_PATH + word}>{word}</Link>
-              <img
-                src={trashImg}
-                alt="trash"
-                onClick={() => {
-                  handleDeleteWord(word);
-                }}
-              />
+            <WordContainer
+              key={Math.random()}
+              path={GLOBAL_PATH + word}
+              onDeleteWord={handleDeleteWord}
+              img={trashImg}
+            >
+              {word}
             </WordContainer>
           ))}
         </Container>
@@ -71,3 +47,9 @@ const WordsSearched = () => {
 };
 
 export default WordsSearched;
+
+WordsSearched.propTypes = {
+  wordsSearched: PropTypes.array,
+  handleDeleteWord: PropTypes.func,
+  handleDeleteSearchedWords: PropTypes.func,
+};

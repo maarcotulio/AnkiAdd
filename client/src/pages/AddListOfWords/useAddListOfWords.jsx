@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
-import { Container, TextArea } from "./style";
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import useSearch from "../../hooks/useSearch";
-import Loader from "../../components/Loader";
 
-const ListDefinitionOfWords = () => {
+export default function useAddListOfWords() {
   const [list, setList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { SearchWordAndAdd, SaveWordToLocalStorage } = useSearch(); // Custom hook
-
+  const { AddToAnki, SaveWordToLocalStorage } = useSearch();
   useEffect(() => {
     async function AddAllWords() {
       if (Array.isArray(list) && list.length > 0) {
@@ -17,9 +15,8 @@ const ListDefinitionOfWords = () => {
             SaveWordToLocalStorage(word);
           }
         });
-        const response = await SearchWordAndAdd(list);
+        await AddToAnki(list, "en", "Check if the words were added");
         setIsLoading(false);
-        console.log(response);
       }
     }
     AddAllWords();
@@ -34,14 +31,10 @@ const ListDefinitionOfWords = () => {
       setList(lines.map((line) => line.split(" ")).flat());
     }
   }
+  return { isLoading, handleSubmit };
+}
 
-  return (
-    <Container>
-      {isLoading && <Loader isLoading />}
-      <h1>Insert a list of words</h1>
-      <TextArea onKeyDown={handleSubmit} />
-    </Container>
-  );
+useAddListOfWords.prototype = {
+  isLoading: PropTypes.bool.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
-
-export default ListDefinitionOfWords;

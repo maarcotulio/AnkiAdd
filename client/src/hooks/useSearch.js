@@ -4,7 +4,7 @@ import newWordAddedEvent from "../utils/newWordAddedEvent";
 import toast from "../utils/toast";
 
 export default function useSearch() {
-  async function SearchWordAndAdd(word, language = "en") {
+  async function AddToAnki(word, language = "en", message = "Word was Added") {
     try {
       const response = await axios.post(`${SERVER}/${language}/addWord`, {
         input: word,
@@ -12,7 +12,7 @@ export default function useSearch() {
 
       console.log(response);
 
-      toast({ type: "success", text: "Word was Added" });
+      toast({ type: "success", text: message });
     } catch (err) {
       if (err.status === 503) {
         return toast({
@@ -40,7 +40,7 @@ export default function useSearch() {
     newWordAddedEvent(updatedWords);
   }
 
-  async function getWordDefinition(word, language) {
+  async function GetWordDefinition(word, language = "en") {
     try {
       const response = await axios.post(`${SERVER}/${language}/searchWord`, {
         input: word,
@@ -74,8 +74,8 @@ export default function useSearch() {
   }
 
   return {
-    SearchWordAndAdd,
-    getWordDefinition,
+    AddToAnki,
+    GetWordDefinition,
     SaveWordToLocalStorage,
     deleteAllWords,
     deleteWordFromList,

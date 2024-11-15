@@ -5,7 +5,7 @@ class WordsController {
     const words = req.body?.input;
     let status = 201;
     if (Array.isArray(words) && words.length >= 1) {
-      await processWordsInBatches(words, 5);
+      status = await processWordsInBatches(words, 5);
     } else {
       status = await addWord(words);
     }
@@ -32,16 +32,22 @@ async function processWordsInBatches(words, batchSize) {
   for (let i = 0; i < words.length; i += batchSize) {
     const batch = words.slice(i, i + batchSize);
 
-    await Promise.all(
+    const results = await Promise.all(
       batch.map((word) => {
         if (word) {
-          addWord(word);
+          return addWord(word);
         }
       })
     );
 
+    if (results.includes(503)) {
+      return 503;
+    }
+
     await delay(2000);
   }
+
+  return 201;
 }
 
 function delay(ms) {
