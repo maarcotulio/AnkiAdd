@@ -4,15 +4,16 @@ export const Container = styled.div`
   width: 100%;
   height: auto;
   margin-top: 60px;
-  text-align: center;
 
   h1 {
     margin-bottom: 8px;
+    text-align: center;
   }
 `;
 
 export const Input = styled.input`
-  width: 600px;
+  max-width: 600px;
+  width: 100%;
   height: 40px;
   position: absolute;
   left: 50%;

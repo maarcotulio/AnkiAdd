@@ -1,16 +1,18 @@
 import { useTheme } from "../App";
 import PropTypes from "prop-types";
-import { Container, ClearBtn } from "./style";
+import { Container, ClearBtn, Menu } from "./style";
 
 import trash from "../../assets/images/icons/trash.svg";
 import trashDarkMode from "../../assets/images/icons/trashDarkMode.svg";
 
 import useWordsSearched from "./useWordsSearched";
 import WordContainer from "./components/WordContainer";
+import { useState } from "react";
 
 const GLOBAL_PATH = "/search/";
 
 const WordsSearched = () => {
+  const [visible, setVisible] = useState("none");
   const { isLightMode } = useTheme();
   const { wordsSearched, handleDeleteWord, handleDeleteSearchedWords } =
     useWordsSearched();
@@ -18,10 +20,14 @@ const WordsSearched = () => {
   const trashImg = isLightMode ? trashDarkMode : trash;
   const hasWordsSearched = wordsSearched?.length >= 1;
 
+  function onClickMenu() {
+    visible === "none" ? setVisible("block") : setVisible("none");
+  }
+
   return (
     <>
       {hasWordsSearched && (
-        <Container>
+        <Container isvisible={visible}>
           <ClearBtn>
             <img
               src={trashImg}
@@ -42,6 +48,8 @@ const WordsSearched = () => {
           ))}
         </Container>
       )}
+
+      <Menu onClick={onClickMenu} />
     </>
   );
 };

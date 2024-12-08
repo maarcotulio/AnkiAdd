@@ -7,6 +7,8 @@ export const Container = styled.header`
   justify-content: space-between;
   align-items: center;
   color: #fff;
+  width: 100%;
+  height: auto;
 
   h1 {
     font-family: "Sora", sans-serif;
@@ -17,9 +19,9 @@ export const Container = styled.header`
     color: inherit;
   }
 
-  .logoAndLanguage {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  @media (max-width: 280px) {
+    h2 {
+      font-size: large;
+    }
   }
 `;

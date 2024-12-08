@@ -12,6 +12,7 @@ import HandleRoutes from "../../Routes";
 import { Container } from "./style";
 import WordsSearched from "../WordsSearched";
 import ToastContainer from "../Toast/ToastContainer";
+import Bottom from "../Bottom";
 
 const ThemeContext = createContext();
 
@@ -35,6 +36,7 @@ const App = () => {
             <Header />
             <WordsSearched />
             <HandleRoutes />
+            <Bottom />
           </Container>
         </ThemeProvider>
       </ThemeContext.Provider>
