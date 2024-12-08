@@ -18,7 +18,7 @@ You'll need to install the [AnkiConnect](https://ankiweb.net/shared/info/2055492
 
 Go to the folder Config and read the comments in the files and make the necessary changes.
 
-Install all necessary node_modules in the files the client and server both use yarn. To install de the modules write this command in your terminal in both files:
+Install all necessary node_modules in the files the client and server both use yarn, you need to use the node in the version 20. To install de the modules write this command in your terminal in both files:
 
 And in the server file you do:
 
