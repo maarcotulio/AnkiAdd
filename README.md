@@ -6,7 +6,7 @@ The main goal of this project is to make the life easy mining cards for Anki. Th
 
 ![image](https://github.com/user-attachments/assets/e10af457-a1c9-4d5b-9b2d-a91bd28998ee)
 
-If the code doesn't find any phrases, it'll replace the phrase with the word you want to remember the meaning of, and the definitions are going to be the same.
+If the code doesn't find any phrases, it'll replace the phrase with the word you want to remember the meaning of, and the definitions are going to be the same. The base configuration is set to use the "Basic" format of adding cards.
 
 # Requirements
 
