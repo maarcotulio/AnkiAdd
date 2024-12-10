@@ -41,6 +41,8 @@ async function addWord(word) {
       `Meaning of ${word}:<br>${enumeratedDefs.join("<br> ")}`
     );
 
+    console.log(card);
+
     await axios.post(URL_TO_THE_ANKICONNECT, card, {
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +52,7 @@ async function addWord(word) {
     console.log(`Word ${word} was added`);
     return 201;
   } catch (error) {
-    console.error("Anki Connect is not working right");
+    console.error("Anki Connect is not working right", error);
     return 503;
   }
 }

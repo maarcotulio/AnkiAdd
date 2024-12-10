@@ -27,7 +27,7 @@ const WordsSearched = () => {
   return (
     <>
       {hasWordsSearched && (
-        <Container isvisible={visible}>
+        <Container $isvisible={visible}>
           <ClearBtn>
             <img
               src={trashImg}

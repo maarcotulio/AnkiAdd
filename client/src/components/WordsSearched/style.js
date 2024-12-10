@@ -18,7 +18,7 @@ export const Container = styled.div`
   border-radius: 16px;
 
   @media (max-width: 1500px) {
-    display: ${({ isvisible }) => isvisible};
+    display: ${({ $isvisible }) => `${$isvisible}`};
   }
 
   ::-webkit-scrollbar {
