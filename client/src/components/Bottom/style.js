@@ -7,6 +7,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   gap: 64px;
+  color: #fff;
 
   .btn-toPage {
     background-color: ${({ theme }) => theme.colors.header.background};
