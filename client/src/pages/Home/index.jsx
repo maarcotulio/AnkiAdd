@@ -6,14 +6,10 @@ const Home = () => {
       <Container>
         <h1>How to Use</h1>
         <p>
-          Choose the language you want to see the definition, the option is in
-          the right of the Anki Adder. <br />
-          Search for the word, if you want to add in to your Anki deck, click in
-          the add icon.{" "}
-          <b>
-            Make sure the Anki before add and AnkiConnect installed and using
-            the port 8765
-          </b>
+          To search for words click in the button Search below, if you want to
+          add in to your Anki deck the word, click in the add icon. Also you,
+          can add a list of words clicking in the button List, but you will not
+          see the definitions. <b>Make sure the Anki is open.</b>
         </p>
       </Container>
     </>
